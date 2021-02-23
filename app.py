@@ -1,17 +1,16 @@
 import sqlite3
 from flask import Flask, render_template, request, jsonify
-
-
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 
 @app.route('/')
 def index():
     return render_template("index.html")
 
 @app.route('/sign_up/')
-def enter_new_student():
+def enter_new_user():
     return render_template('sign_up.html')
 
 @app.route('/add-record/', methods=['POST'])
@@ -51,7 +50,22 @@ def show_records():
         print("There was an error fetching results from the database.") + str(e)
     finally:
         con.close()
-        return jsonify("mywebsite.db")
+        return jsonify(records)
 
+@app.route('/delete-user/<int:userid>/', methods=["GET"])
+def delete_student(userid):
 
+    msg = None
+    try:
+        with sqlite3.connect('mywebsite.db') as con:
+            cur = con.cursor()
+            cur.execute("DELETE FROM user WHERE userid=" + str(userid))
+            con.commit()
+            msg = "A record was deleted successfully from the database."
+    except Exception as e:
+        con.rollback()
+        msg = "Error occurred when deleting a user in the database: " + str(e)
+    finally:
+        con.close()
+        return render_template('delete-success.html', msg=msg)
 
