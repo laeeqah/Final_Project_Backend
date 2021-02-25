@@ -72,37 +72,8 @@ def listUsers():
 if __name__ =='__main__':
     app.run(debug=True)
 
-# @app.route('/show_records/', methods=["GET"])
-# def show_records():
-#     with sqlite3.connect("mywebsite.db") as conn:
-#         conn.cursor()
-#
-#         conn.commit()
-#     try:
-#         with sqlite3.connect('mywebsite.db') as con:
-#             cur = con.cursor()
-#             cur.execute("SELECT * FROM user")
-#             records = cur.fetchall()
-#     except Exception as e:
-#         con.rollback()
-#         print("There was an error fetching results from the database.") + str(e)
-#     finally:
-#         con.close()
-#         return jsonify(records)
-#
-# @app.route('/delete-user/<int:userid>/', methods=["GET"])
-# def delete_student(userid):
-#
-#     msg = None
-#     try:
-#         with sqlite3.connect('mywebsite.db') as con:
-#             cur = con.cursor()
-#             cur.execute("DELETE FROM user WHERE userid=" + str(userid))
-#             con.commit()
-#             msg = "A record was deleted successfully from the database."
-#     except Exception as e:
-#         con.rollback()
-#         msg = "Error occurred when deleting a user in the database: " + str(e)
-#     finally:
-#         con.close()
-#         return render_template('delete-success.html', msg=msg)
+@app.route('/logged/')
+def logged():
+    try:
+        username = request.form['username']
+        password = request.form['password']
