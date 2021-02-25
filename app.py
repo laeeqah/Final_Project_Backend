@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask,request,jsonify
+from flask import Flask,render_template, request,jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -10,7 +10,10 @@ def initialize_database():
     conn = sqlite3.connect('database.db')
 
     conn.execute('CREATE TABLE if not exists  user(userid integer primary key autoincrement, fullname TEXT ,username TEXT, email TEXT, password TEXT)')
+    conn.execute('CREATE TABLE if not exists  products(proid integer primary key autoincrement, description TEXT, color TEXT, size TEXT) ')
+
     print("user table created succesfully")
+    print("product table created succesfully")
 
 
 initialize_database()
@@ -21,27 +24,34 @@ def dict_factory(cursor, row):
         d[col[0]] =row[idx]
     return d
 
-@app.route('/add-record/', methods=['POST','GET'])
-def add_new_record():
-    msg=None
-    if request.method == 'POST':
-        try:
-            fullname = request.form['fullname']
-            username = request.form['username']
-            email = request.form['email']
-            password = request.form['password']
+@app.route('/')
+@app.route('/sign-up/', methods=['GET'])
+def sign_up():
+    return render_template('sign_up.html')
 
-            with sqlite3.connect('database.db') as con:
-                cur = con.cursor()
-                cur.execute("INSERT INTO user (fullname, username, email, password) VALUES (?, ?, ?, ?)", (fullname, username, email, password))
-                con.commit()
-                msg = "Record successfully added."
-        except Exception as e:
-            con.rollback()
-            msg = "Error occurred in insert operation: " + str(e)
-        finally:
-            con.close()
-            return jsonify(msg)
+
+
+
+@app.route('/')
+@app.route('/main/', methods=['POST'])
+def main_page():
+    try:
+        fullname = request.form['fullname']
+        username = request.form['username']
+        email = request.form['email_address']
+        password = request.form['password']
+        print(fullname,username)
+        with sqlite3.connect('database.db') as con:
+            cur = con.cursor()
+            cur.execute("INSERT INTO user (fullname, username, email, password) VALUES (?, ?, ?, ?)", (fullname, username, email, password))
+            con.commit()
+            msg = "Record successfully added."
+    except Exception as e:
+        con.rollback()
+        msg = "Error occurred in insert operation: " + str(e)
+    finally:
+        con.close()
+    return jsonify(msg)
 
 
 @app.route('/list-records/')
