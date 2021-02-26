@@ -70,9 +70,12 @@ def listUsers():
 
 if __name__ =='__main__':
     app.run(debug=True)
-#
-# @app.route('/logged/')
+
+# @app.route('/logged/', methods= ['GET','POST'])
 # def logged():
-#     try:
-#         username = request.form['username']
-#         password = request.form['password']
+#     error = None
+#     if request.method == 'POST':
+#
+#         try:
+#             username = request.form['username']
+#             password = request.form['password']
