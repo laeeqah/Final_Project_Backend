@@ -15,6 +15,9 @@ def initialize_database():
     print("user table created succesfully")
     print("product table created succesfully")
 
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM user")
+    print(cur.fetchall())
 
 initialize_database()
 
@@ -24,11 +27,6 @@ def dict_factory(cursor, row):
         d[col[0]] =row[idx]
     return d
 
-@app.route('/')
-@app.route('/sign-up/', methods=['GET'])
-def sign_up():
-    return render_template('sign_up.html')
-
 
 
 
@@ -36,25 +34,23 @@ def sign_up():
 @app.route('/main/', methods=['POST'])
 def main_page():
     if  request.method == "POST":
-        response ={}
-        response['msg'] = None
+        msg = None
         try:
-            fullname = request.form['fullname']
-            username = request.form['username']
-            email = request.form['email_address']
-            password = request.form['password']
+            post_data = request.get_json()
+            fullname = post_data['fullname']
+            username = post_data['username']
+            email = post_data['email_address']
+            password = post_data['password']
             print(fullname,username)
             with sqlite3.connect('database.db') as con:
                 cur = con.cursor()
                 cur.execute("INSERT INTO user (fullname, username, email, password) VALUES (?, ?, ?, ?)", (fullname, username, email, password))
                 con.commit()
-                response['msg'] = "Record successfully added."
+                msg = "Record successfully added."
         except Exception as e:
-            con.rollback()
-            response['msg']  = "Error occurred in insert operation: " + str(e)
+            msg = "Error occurred in insert operation: " + str(e)
         finally:
-            con.close()
-            return response
+            return {'msg' : msg}
 
 
 @app.route('/list-records/')
@@ -75,8 +71,8 @@ def listUsers():
 if __name__ =='__main__':
     app.run(debug=True)
 
-# @app.route('/logged/')
-# def logged():
-#     try:
-#         username = request.form['username']
-#         password = request.form['password']
+@app.route('/logged/')
+def logged():
+    try:
+        username = request.form['username']
+        password = request.form['password']
