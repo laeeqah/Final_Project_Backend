@@ -35,23 +35,26 @@ def sign_up():
 @app.route('/')
 @app.route('/main/', methods=['POST'])
 def main_page():
-    try:
-        fullname = request.form['fullname']
-        username = request.form['username']
-        email = request.form['email_address']
-        password = request.form['password']
-        print(fullname,username)
-        with sqlite3.connect('database.db') as con:
-            cur = con.cursor()
-            cur.execute("INSERT INTO user (fullname, username, email, password) VALUES (?, ?, ?, ?)", (fullname, username, email, password))
-            con.commit()
-            msg = "Record successfully added."
-    except Exception as e:
-        con.rollback()
-        msg = "Error occurred in insert operation: " + str(e)
-    finally:
-        con.close()
-    return jsonify(msg)
+    if  request.method == "POST":
+        response ={}
+        response['msg'] = None
+        try:
+            fullname = request.form['fullname']
+            username = request.form['username']
+            email = request.form['email_address']
+            password = request.form['password']
+            print(fullname,username)
+            with sqlite3.connect('database.db') as con:
+                cur = con.cursor()
+                cur.execute("INSERT INTO user (fullname, username, email, password) VALUES (?, ?, ?, ?)", (fullname, username, email, password))
+                con.commit()
+                response['msg'] = "Record successfully added."
+        except Exception as e:
+            con.rollback()
+            response['msg']  = "Error occurred in insert operation: " + str(e)
+        finally:
+            con.close()
+            return response
 
 
 @app.route('/list-records/')
