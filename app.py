@@ -70,9 +70,9 @@ def listUsers():
 
 if __name__ =='__main__':
     app.run(debug=True)
-
-@app.route('/logged/')
-def logged():
-    try:
-        username = request.form['username']
-        password = request.form['password']
+#
+# @app.route('/logged/')
+# def logged():
+#     try:
+#         username = request.form['username']
+#         password = request.form['password']
