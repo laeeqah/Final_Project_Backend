@@ -28,11 +28,7 @@ def dict_factory(cursor, row):
         d[col[0]] =row[idx]
     return d
 
-@app.route('/')
-def register():
-    return render_template('sign_up.html')
-
-
+# REGISTRATION
 @app.route('/')
 @app.route('/main/', methods=['POST'])
 def main_page():
@@ -55,7 +51,7 @@ def main_page():
         finally:
             return {'msg':msg}
 
-
+# SHOW ALL RECORDS
 @app.route('/list-records/')
 def listUsers():
     try:
@@ -71,14 +67,27 @@ def listUsers():
         print("Something happened when getting data from db: " + str(e))
     return jsonify(rows)
 
+
+# LOGIN
+@app.route('/logged/', methods= ['GET','POST'])
+def logged():
+    msg = None
+    if request.method == 'POST':
+
+        try:
+            username = request.form['username']
+            password = request.form['password']
+            print(username)
+            with sqlite3.connect('database.db') as con:
+                cur = con.cursor()
+                cur.execute("SELECT * FROM user(username,password) VALUES (?, ?)", (username, password))
+                con.commit()
+                msg = str("Successfully logged")
+        except Exception as e:
+            msg = "Error occurred in insert operation: " + str(e)
+        finally:
+            return {'msg':msg}
+
+
 if __name__ =='__main__':
     app.run(debug=True)
-
-# @app.route('/logged/', methods= ['GET','POST'])
-# def logged():
-#     error = None
-#     if request.method == 'POST':
-#
-#         try:
-#             username = request.form['username']
-#             password = request.form['password']
