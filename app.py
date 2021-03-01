@@ -2,15 +2,14 @@ import sqlite3
 from flask import Flask,render_template, request,jsonify
 from flask_cors import CORS
 
-app = Flask(__name__)
-CORS(app)
+
 
 
 def initialize_database():
     conn = sqlite3.connect('database.db')
 
     conn.execute('CREATE TABLE if not exists  user(userid integer primary key autoincrement, fullname TEXT ,username TEXT, email TEXT, password TEXT)')
-    conn.execute('CREATE TABLE if not exists  products(proid integer primary key autoincrement, description TEXT, color TEXT, size TEXT) ')
+    # conn.execute('CREATE TABLE if not exists  products(proid integer primary key autoincrement, description TEXT, color TEXT, size TEXT) ')
 
     print("user table created succesfully")
     print("product table created succesfully")
@@ -21,13 +20,17 @@ def initialize_database():
 
 initialize_database()
 
+app = Flask(__name__)
+CORS(app)
 def dict_factory(cursor, row):
     d = {}
     for idx, col in enumerate(cursor.description):
         d[col[0]] =row[idx]
     return d
 
-
+@app.route('/')
+def register():
+    return render_template('sign_up.html')
 
 
 @app.route('/')
@@ -39,18 +42,18 @@ def main_page():
             post_data = request.get_json()
             fullname = post_data['fullname']
             username = post_data['username']
-            email = post_data['email_address']
+            email = post_data['email']
             password = post_data['password']
             print(fullname,username)
             with sqlite3.connect('database.db') as con:
                 cur = con.cursor()
                 cur.execute("INSERT INTO user (fullname, username, email, password) VALUES (?, ?, ?, ?)", (fullname, username, email, password))
                 con.commit()
-                msg = "Record successfully added."
+                msg = str("Record successfully added.")
         except Exception as e:
             msg = "Error occurred in insert operation: " + str(e)
         finally:
-            return {'msg' : msg}
+            return {'msg':msg}
 
 
 @app.route('/list-records/')
