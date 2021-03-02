@@ -131,7 +131,6 @@ def cart():
                 cur.execute("INSERT INTO products(name, images, price, description, categories, color , size) VALUES('Maroon Dress','https://i.postimg.cc/PqD1WnVf/cocktail-dress2.jpg','R150', Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.', 'Accessory','Brown', 'All')")
 
 
-
                 con.commit()
                 msg = str("items added.")
         except Exception as e:
