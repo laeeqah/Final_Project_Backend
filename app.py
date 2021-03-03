@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask,render_template, request,jsonify
+from flask import Flask, request,jsonify
 from flask_cors import CORS
 
 
@@ -9,7 +9,7 @@ def initialize_database():
     conn = sqlite3.connect('database.db')
 
     conn.execute('CREATE TABLE if not exists  user(userid integer primary key autoincrement, fullname TEXT not null ,username TEXT not null, email TEXT not null, password TEXT not null)')
-    conn.execute('CREATE TABLE if not exists  products(proid integer primary key autoincrement, images TEXT, price TEXT, description TEXT, categories TEXT, color TEXT, size TEXT)')
+    conn.execute('CREATE TABLE if not exists  products(proid integer primary key autoincrement, name TEXT, images TEXT, price TEXT, description TEXT, categories TEXT, color TEXT, size TEXT)')
 
     print("user table created succesfully")
     print("product table created succesfully")
@@ -22,6 +22,8 @@ initialize_database()
 
 app = Flask(__name__)
 CORS(app)
+
+
 def dict_factory(cursor, row):
     d = {}
     for idx, col in enumerate(cursor.description):
@@ -52,17 +54,15 @@ def main_page():
             return {'msg':msg}
 
 # SHOW ALL RECORDS
-@app.route('/list-records/')
+@app.route('/list-records/', methods=['GET'])
 def listUsers():
     try:
         with sqlite3.connect('database.db') as con:
             con.row_factory = dict_factory
             con = sqlite3.connect("database.db")
             cur = con.cursor()
-            cur.execute("select * from user")
-
+            cur.execute("SELECT * FROM user")
             rows = cur.fetchall()
-
     except Exception as e:
         print("Something happened when getting data from db: " + str(e))
     return jsonify(rows)
@@ -75,13 +75,13 @@ def logged():
     if request.method == 'GET':
 
         try:
-            post_data = request.get_json()
-            username = post_data['username']
-            password = post_data['password']
-            print(username)
+            # post_data = request.get_json()
+            # username = post_data['username']
+            # password = post_data['password']
+            # print(username)
             with sqlite3.connect('database.db') as con:
                 cur = con.cursor()
-                cur.execute("SELECT * FROM user(username,password) VALUES (?, ?)", (username, password))
+                cur.execute("SELECT * FROM user")
                 con.commit()
                 msg = str("Successfully logged")
         except Exception as e:
@@ -171,6 +171,7 @@ def listProducts():
             cur = con.cursor()
             cur.execute("select * from products")
             data = cur.fetchall()
+            print(data)
 
     except Exception as e:
         con.rollback()
