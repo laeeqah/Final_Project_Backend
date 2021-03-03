@@ -139,8 +139,9 @@ def cart():
         finally:
             return {'msg':msg}
 
-@app.route('/list-products/')
+@app.route('/list-products/', methods = ['GET'])
 def listProducts():
+    data = []
     try:
         with sqlite3.connect('database.db') as con:
             con.row_factory = dict_factory
@@ -148,11 +149,11 @@ def listProducts():
             cur = con.cursor()
             cur.execute("select * from products")
 
-            rows = cur.fetchall()
+            data = cur.fetchall()
 
     except Exception as e:
         print("Something happened when getting data from db: " + str(e))
-    return jsonify(rows)
+    return jsonify(data)
 
 if __name__ =='__main__':
     app.run(debug=True)
