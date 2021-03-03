@@ -75,8 +75,9 @@ def logged():
     if request.method == 'GET':
 
         try:
-            username = request.form['username']
-            password = request.form['password']
+            post_data = request.get_json()
+            username = post_data['username']
+            password = post_data['password']
             print(username)
             with sqlite3.connect('database.db') as con:
                 cur = con.cursor()
@@ -138,6 +139,20 @@ def cart():
         finally:
             return {'msg':msg}
 
+@app.route('/list-products/')
+def listProducts():
+    try:
+        with sqlite3.connect('database.db') as con:
+            con.row_factory = dict_factory
+            con = sqlite3.connect("database.db")
+            cur = con.cursor()
+            cur.execute("select * from products")
+
+            rows = cur.fetchall()
+
+    except Exception as e:
+        print("Something happened when getting data from db: " + str(e))
+    return jsonify(rows)
 
 if __name__ =='__main__':
     app.run(debug=True)
