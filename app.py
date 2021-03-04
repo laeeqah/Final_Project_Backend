@@ -32,7 +32,7 @@ def dict_factory(cursor, row):
 
 # REGISTRATION
 @app.route('/')
-@app.route('/main/', methods=['POST'])
+@app.route('/register/', methods=['POST'])
 def main_page():
     if  request.method == "POST":
         msg = None
