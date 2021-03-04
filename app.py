@@ -2,7 +2,8 @@ import sqlite3
 from flask import Flask, request,jsonify
 from flask_cors import CORS
 
-
+app = Flask(__name__)
+CORS(app, supports_credentials=True)
 
 
 def initialize_database():
@@ -20,8 +21,7 @@ def initialize_database():
 
 initialize_database()
 
-app = Flask(__name__)
-CORS(app)
+
 
 
 def dict_factory(cursor, row):
@@ -53,6 +53,28 @@ def main_page():
         finally:
             return {'msg':msg}
 
+@app.route('/add_product/', methods=['POST'])
+def add_Product():
+    if  request.method == "POST":
+        msg = None
+        try:
+            post_data = request.get_json()
+            p_name = post_data['p_name']
+            img_links = post_data['img_links']
+            p_rice = post_data['p_rice']
+            des = post_data['description']
+            color = post_data['color']
+            size = post_data['size']
+            print(p_name,img_links, p_rice, des, color, size)
+            with sqlite3.connect('database.db') as con:
+                cur = con.cursor()
+                cur.execute("INSERT INTO products(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?)", (p_name, img_links, p_rice, des, color, size))
+                con.commit()
+                msg = str("Product successfully added.")
+        except Exception as e:
+            msg = "Error occurred in insert operation: " + str(e)
+        finally:
+            return {'msg':msg}
 # SHOW ALL RECORDS
 @app.route('/list-records/', methods=['GET'])
 def listUsers():
@@ -139,28 +161,7 @@ def cart():
         finally:
             return {'msg':msg}
 
-@app.route('/add_product/', methods=['POST'])
-def add_Product():
-    if  request.method == "POST":
-        msg = None
-        try:
-            post_data = request.get_json()
-            p_name = post_data['p_name']
-            img_links = post_data['img_links']
-            p_rice = post_data['p_rice']
-            des = post_data['description']
-            color = post_data['color']
-            size = post_data['size']
-            print(p_name,img_links, p_rice, des, color, size)
-            with sqlite3.connect('database.db') as con:
-                cur = con.cursor()
-                cur.execute("INSERT INTO products (name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?)", (p_name, img_links, p_rice, des, color, size))
-                con.commit()
-                msg = str("Product successfully added.")
-        except Exception as e:
-            msg = "Error occurred in insert operation: " + str(e)
-        finally:
-            return {'msg':msg}
+
 
 
 @app.route('/list-products/', methods=['GET'])
@@ -182,5 +183,5 @@ def listProducts():
 
 
 
-if __name__ =='__main__':
-    app.run(debug=True)
+# if __name__ =='__main__':
+#     app.run(debug=True)
