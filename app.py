@@ -59,7 +59,6 @@ def listUsers():
     try:
         with sqlite3.connect('database.db') as con:
             con.row_factory = dict_factory
-            con = sqlite3.connect("database.db")
             cur = con.cursor()
             cur.execute("SELECT * FROM user")
             rows = cur.fetchall()
@@ -73,21 +72,22 @@ def listUsers():
 def logged():
     msg = None
     if request.method == 'GET':
-
         try:
-            # post_data = request.get_json()
-            # username = post_data['username']
-            # password = post_data['password']
-            # print(username)
+            post_data = request.get_json()
+            username = post_data['username']
+            password = post_data['password']
+            print(username,password)
             with sqlite3.connect('database.db') as con:
                 cur = con.cursor()
-                cur.execute("SELECT * FROM user")
+                cur.execute("SELECT * FROM user ")
                 con.commit()
+                con.close()
                 msg = str("Successfully logged")
         except Exception as e:
             msg = "Error occurred in insert operation: " + str(e)
+
         finally:
-            return {'msg':msg}
+            return jsonify('msg',msg)
 
 # PRODUCTS
 @app.route('/')
