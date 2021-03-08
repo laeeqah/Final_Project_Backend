@@ -147,12 +147,9 @@ def logged():
 #         cur.execute('INSERT INTO men(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Men Watch','https://i.postimg.cc/rsgtgVLW/accessory-watch.jpg','R150', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Accessory','Black', 'All'))
 #         cur.execute('INSERT INTO men(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Men Wallet','https://i.postimg.cc/RV9RRhw3/accessory-wallet.jpg','R50', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Accessory','Black', 'All'))
 #         cur.execute('INSERT INTO men(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Men Belt','https://i.postimg.cc/PqLNZbxm/men-belt.jpg','R150', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Accessory','Brown', 'All'))
-#
+
 #         con.commit()
 # cart()
-
-
-
 
 
 # LIST PRODUCT
