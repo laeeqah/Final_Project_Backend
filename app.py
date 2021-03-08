@@ -2,10 +2,6 @@ import sqlite3
 from flask import Flask, request,jsonify
 from flask_cors import CORS
 
-app = Flask(__name__)
-CORS(app)
-
-
 def initialize_database():
     conn = sqlite3.connect('database.db')
 
@@ -18,6 +14,10 @@ def initialize_database():
 
 
 initialize_database()
+
+
+app = Flask(__name__)
+CORS(app)
 
 def dict_factory(cursor, row):
     d = {}
@@ -117,9 +117,9 @@ def logged():
 #         cur = con.cursor()
 # #         # WOMEN PRODUCTS
 # #         # DRESSES
-#         cur.execute('INSERT into women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Maroon Dress','https://i.postimg.cc/PqD1WnVf/cocktail-dress2.jpg','R800', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Dress','Maroon', 'M'))
-#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Sparkly Dress','https://i.postimg.cc/dV6VgH7R/cocktail-dress3.jpg','R950', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Dress','Light Violet', 'S'))
-#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Maroon Dress','https://i.postimg.cc/PqD1WnVf/cocktail-dress2.jpg','R950', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Dress','Maroon', 'M'))
+#         cur.execute('INSERT into women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Sparkly Dress','https://i.postimg.cc/PqD1WnVf/cocktail-dress2.jpg','R800', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Dress','Maroon', 'M'))
+#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Maroon Dress','https://i.postimg.cc/dV6VgH7R/cocktail-dress3.jpg','R950', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Dress','Light Violet', 'S'))
+#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Sparkly Dress','https://i.postimg.cc/PqD1WnVf/cocktail-dress2.jpg','R950', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Dress','Maroon', 'M'))
 # #         # # TOPS
 #         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Maroon Blouse','https://i.postimg.cc/vBkB344p/women-blouse-maroon.jpg','R500', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Tops','Maroon', 'M'))
 #         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Maroon Blouse','https://i.postimg.cc/vBkB344p/women-blouse-maroon.jpg','R500', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Tops','Maroon', 'S'))
