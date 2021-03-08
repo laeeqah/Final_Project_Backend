@@ -156,13 +156,31 @@ def logged():
 
 
 # LIST PRODUCT
-@app.route('/list-products/', methods=['GET'])
-def listProducts():
+# LIST WOMEN
+@app.route('/list-women/', methods=['GET'])
+def listWomen():
     try:
         with sqlite3.connect('database.db') as con:
             con.row_factory = dict_factory
             cur = con.cursor()
-            cur.execute("select * from products")
+            cur.execute("select * from women")
+            data = cur.fetchall()
+
+    except Exception as e:
+        con.rollback()
+        print("Something happened when getting data from db: " + str(e))
+    finally:
+        con.close()
+        return jsonify(data)
+
+# LIST MEN
+@app.route('/list-men/', methods=['GET'])
+def listMen():
+    try:
+        with sqlite3.connect('database.db') as con:
+            con.row_factory = dict_factory
+            cur = con.cursor()
+            cur.execute("select * from men")
             data = cur.fetchall()
 
 
