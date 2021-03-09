@@ -64,7 +64,7 @@ def add_Product():
 
             with sqlite3.connect('database.db') as con:
                 cur = con.cursor()
-                cur.execute("INSERT INTO products(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?)", (p_name, img_links, p_rice, des, color, size))
+                cur.execute("INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?)", (p_name, img_links, p_rice, des, color, size))
                 con.commit()
                 msg = str("Product successfully added.")
         except Exception as e:
