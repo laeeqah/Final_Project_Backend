@@ -48,6 +48,7 @@ def main_page():
         finally:
             return jsonify(msg=msg)
 
+# ADMIN
 @app.route('/add_product/', methods=['POST'])
 def add_Product():
     if  request.method == "POST":
@@ -73,7 +74,7 @@ def add_Product():
         finally:
             return {'msg':msg}
 
-# SHOW ALL RECORDS
+# SHOW ALL USER
 @app.route('/list-records/', methods=['GET'])
 def listUsers():
     try:
@@ -87,7 +88,7 @@ def listUsers():
     return jsonify(rows)
 
 
-# LOGIN
+# LOGIN FUNCTION
 @app.route('/logged/', methods= ['GET'])
 def logged():
     msg = None
@@ -117,28 +118,28 @@ def logged():
 #         cur = con.cursor()
 # #         # WOMEN PRODUCTS
 # #         # DRESSES
-#         cur.execute('INSERT into women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Sparkly Dress','https://i.postimg.cc/PqD1WnVf/cocktail-dress2.jpg','R800', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Dress','Maroon', 'M'))
-#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Maroon Dress','https://i.postimg.cc/dV6VgH7R/cocktail-dress3.jpg','R950', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Dress','Light Violet', 'S'))
-#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Sparkly Dress','https://i.postimg.cc/PqD1WnVf/cocktail-dress2.jpg','R950', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Dress','Maroon', 'M'))
+#         cur.execute('INSERT into women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Sparkly Dress','https://i.postimg.cc/PqD1WnVf/cocktail-dress2.jpg','800', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Dress','Maroon', 'M'))
+#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Maroon Dress','https://i.postimg.cc/dV6VgH7R/cocktail-dress3.jpg','950', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Dress','Light Violet', 'S'))
+#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Sparkly Dress','https://i.postimg.cc/PqD1WnVf/cocktail-dress2.jpg','950', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Dress','Maroon', 'M'))
 # #         # # TOPS
-#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Maroon Blouse','https://i.postimg.cc/vBkB344p/women-blouse-maroon.jpg','R500', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Tops','Maroon', 'M'))
-#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Maroon Blouse','https://i.postimg.cc/vBkB344p/women-blouse-maroon.jpg','R500', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Tops','Maroon', 'S'))
-#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Classy Crop-Top','https://i.postimg.cc/SQrymcBQ/black-croptop-women.jpg','R300', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Tops','Black', 'S'))
-# #         # # PANTS&SKIRTS
-#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Nude Classy Pants','https://i.postimg.cc/XvNpJSMD/women-pants1.jpg','R300', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Pants and Skirts','Nude', 'S'))
-#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Classy Black Pants','https://i.postimg.cc/Vk8Jx0Kw/women-pants2.jpg','R300', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Pants and Skirts','Black', 'S'))
-#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Black and white Check','https://i.postimg.cc/QNKVVJPs/women-skirts2.jpg','R200', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Pants and skirts','Black&White Check', 'S'))
-#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('PLain White Skirt','https://i.postimg.cc/j2fj9RNC/women-skirts3.jpg','R200', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Pants and Skirts','White', 'S'))
+#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Maroon Blouse','https://i.postimg.cc/vBkB344p/women-blouse-maroon.jpg','500', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Tops','Maroon', 'M'))
+#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Classy Crop-Top','https://i.postimg.cc/SQrymcBQ/black-croptop-women.jpg','300', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Tops','Black', 'S'))
+#         #         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Maroon Blouse','https://i.postimg.cc/vBkB344p/women-blouse-maroon.jpg','500', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Tops','Maroon', 'S'))
+# # PANTS&SKIRTS
+#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Nude Classy Pants','https://i.postimg.cc/XvNpJSMD/women-pants1.jpg','300', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Pants and Skirts','Nude', 'S'))
+#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Classy Black Pants','https://i.postimg.cc/Vk8Jx0Kw/women-pants2.jpg','300', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Pants and Skirts','Black', 'S'))
+#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Black and white Check','https://i.postimg.cc/QNKVVJPs/women-skirts2.jpg','200', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Pants and skirts','Black&White Check', 'S'))
+#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('PLain White Skirt','https://i.postimg.cc/j2fj9RNC/women-skirts3.jpg','200', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Pants and Skirts','White', 'S'))
 # #         # ACCESSORY
-#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Leather Bag','https://i.postimg.cc/HkdLZDLs/women-bag2.jpg','R250', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Accessory','Black', 'All'))
-#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Gold Earrings','https://i.postimg.cc/qBN6yTNP/accessory1.jpg','R400', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Accessory','Gold', 'All'))
-#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('White Heels','https://i.postimg.cc/JnG0NNzN/accessory2.jpg','R600', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Accessory','White', '6+'))
+#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Leather Bag','https://i.postimg.cc/HkdLZDLs/women-bag2.jpg','250', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Accessory','Black', 'All'))
+#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Gold Earrings','https://i.postimg.cc/qBN6yTNP/accessory1.jpg','400', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Accessory','Gold', 'All'))
+#         cur.execute('INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('White Heels','https://i.postimg.cc/JnG0NNzN/accessory2.jpg','600', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Accessory','White', '6+'))
 #
 # #         # MEN PRODUCTS
 #              # SHIRTS
-#         cur.execute('INSERT INTO men(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Blue Long sleeve shirt','https://i.postimg.cc/G34z26d2/shirt4.jpg','R300', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Men Tops','Blue', 'M'))
-#         cur.execute('INSERT INTO men(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Maroon Shirt','https://i.postimg.cc/jqBcJvSh/men-shirts1.jpg','R400', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Men Tops','Maroon', 'M'))
-#         cur.execute('INSERT INTO men(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Blue Short sleeve shirt','https://i.postimg.cc/DysgQsW3/shirt3.jpg','R250', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Men Tops','Blue', 'M'))
+#         cur.execute('INSERT INTO men(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Blue Long sleeve shirt','https://i.postimg.cc/G34z26d2/shirt4.jpg','300', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Men Tops','Blue', 'M'))
+#         cur.execute('INSERT INTO men(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Maroon Shirt','https://i.postimg.cc/jqBcJvSh/men-shirts1.jpg','400', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Men Tops','Maroon', 'M'))
+#         cur.execute('INSERT INTO men(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Blue Short sleeve shirt','https://i.postimg.cc/DysgQsW3/shirt3.jpg','250', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Men Tops','Blue', 'M'))
 #              # PANTS
 #         cur.execute('INSERT INTO men(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Black Pants','https://i.postimg.cc/V5yJLJ1j/men-pants-black.jpg','R300', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Pants','Black', 'M'))
 #         cur.execute('INSERT INTO men(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?, ? , ?, ?)',('Black Dress Pants','https://i.postimg.cc/V5yJLJ1j/men-pants-black.jpg','R400', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard.', 'Pants','Black', 'M'))
