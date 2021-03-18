@@ -55,7 +55,7 @@ def add_Product():
         msg = None
         try:
             post_data = request.get_json()
-            p_name = post_data['p_name']
+            product_name = post_data['product_name']
             img_links = post_data['img_links']
             p_rice = post_data['p_rice']
             des = post_data['description']
@@ -65,7 +65,7 @@ def add_Product():
 
             with sqlite3.connect('database.db') as con:
                 cur = con.cursor()
-                cur.execute("INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?)", (p_name, img_links, p_rice, des, color, size))
+                cur.execute("INSERT INTO women(name, images, price, description, categories, color , size) VALUES (?, ?, ?, ?)", (product_name, img_links, p_rice, des, color, size))
                 con.commit()
                 msg = str("Product successfully added.")
         except Exception as e:
