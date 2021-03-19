@@ -9,8 +9,7 @@ def initialize_database():
     conn.execute('CREATE TABLE if not exists  women(proid integer primary key autoincrement, name TEXT, images TEXT, price TEXT, description TEXT, categories TEXT, color TEXT, size TEXT)')
     conn.execute('CREATE TABLE if not exists  men(proid integer primary key autoincrement, name TEXT, images TEXT, price TEXT, description TEXT, categories TEXT, color TEXT, size TEXT)')
 
-    print("user table created succesfully")
-    print("women&men table created succesfully")
+
 
 
 initialize_database()
@@ -37,7 +36,7 @@ def main_page():
             username = post_data['username']
             email = post_data['email']
             password = post_data['password']
-            print(fullname,username)
+
             with sqlite3.connect('database.db') as con:
                 cur = con.cursor()
                 cur.execute("INSERT INTO user (fullname, username, email, password) VALUES (?, ?, ?, ?)", (fullname, username, email, password))
